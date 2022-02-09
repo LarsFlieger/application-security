@@ -1861,14 +1861,14 @@ public class IntegerOverflow {
 
 	private void setElementToExtraPosition(int extra, String element) {
 //		System.out.println("current + extra = " + (current + extra));
-		if (extra < 0 || current + extra > MAX) {
+		if (extra < 0 || current + extra > MAX - 1) {
 			throw new IllegalArgumentException();
 		}
 		data.set(current + extra, element);
 	}
 
 	private void setElementToExtraPositionMoreSecure(int extra, String element) {
-		if (extra < 0 || current > MAX - extra) {
+		if (extra < 0 || current > MAX - 1 - extra) {
 			throw new IllegalArgumentException();
 		}
 		data.set(current + extra, element);
@@ -1876,7 +1876,7 @@ public class IntegerOverflow {
 
 	private void setElementToExtraPositionSecure(int extra, String element) {
 		BigInteger currentBig = BigInteger.valueOf(current);
-		BigInteger maxBig = BigInteger.valueOf(MAX);
+		BigInteger maxBig = BigInteger.valueOf(MAX - 1);
 		BigInteger extraBig = BigInteger.valueOf(extra);
 		if (extra < 0 || currentBig.add(extraBig).compareTo(maxBig) > 0) {
 			throw new IllegalArgumentException();
